@@ -15,26 +15,32 @@ quickly and efficiently select the elements we need.
 ## Define the Computer Science Version of "Tree"
 
 What do we mean when we say that the DOM is a tree? Trees make a good metaphor
-for the DOM because we intuitively understand how we might traverse them.
-Starting at the roots, one can climb up the tree and out to the farthest — and
-thinnest — branches.
+for the DOM because we intuitively understand how they relate to the original
+seed, the _root node_.
 
-The thicker a branch is, the stronger its connections are: the more it holds
-within it. Likewise, the thinner a branch is, the less it holds inside.
+Starting at the original fertilized seed pod, branches extend outward and
+upward. The oldest, thickest branches grow most directly from the original
+seed. Thicker branches are eventually able to split into (multiple) thinner
+_child_ branches.
 
-The DOM works basically the same way, except we usually talk about the root as
-being at the top of the DOM and the leaves being the most deeply nested HTML
-elements. So basically, we can imagine a tree turned on its head.
+The DOM works basically the same way, except we usually talk about the original
+seed pod as being a _root node_ or a _root element_. Additionally, we turn the
+biological tree, well, on its head. From the _root node_ branches extend down
+and out so that the "leaves" are the most deeply nested HTML elements.
+
+![Graphic of a DOM node by user Eib, via Wikipedia][dom-graphic]
 
 ## Describe How the DOM Works as a Tree
 
-An interesting property of trees is that every tree can contain _subtrees_, which we can, for all intents and purposes, treat independently of their parent trees.
+An interesting property of trees is that every tree can contain _subtrees_,
+which we can treat independently of their parent trees.
 
-Practically speaking, the DOM begins at `<html>`, but we should think carefully
-about manipulating what's between the `<head></head>` tags. Instead, we can look
-at the DOM subtree with its root at `<body>` and only deal with things that will
-be visible on the page. Within that tree, we might also deal with subtrees. So,
-for example, if we have
+Practically speaking, the DOM begins at `<html>`, but most of the time, we'll
+prefer to do our JavaScript manipulations in the `<body>` _subtree_, because,
+we can see it! Naturally, the `<body>` _subtree_ will have _subtrees_ (and
+those trees will have _subtrees_...)
+
+So, for example, if we have:
 
 ``` html
 <body>
@@ -86,12 +92,13 @@ We could simply treat it as the tree
  "Hello!"     "Sup?"
 ```
 
-## Practice exploring the DOM
+## Practice Exploring the DOM
 
-Remember when we said that we could organize our tree in such a way that a
-node's metadata didn't interfere with finding its children? It turns out that
-not only does providing additional information about a node make it more
-_useful_, it also makes it easier to find.
+When you learned HTML, you probably learned about adding attributes like
+`class` and `id` to HTML elements. Later you also probably learned to use
+semantic markup to accurately mark-up the purpose of your content. By having
+meaningful attributes and semantic elements in our HTML, we find or "target"
+the DOM elements.
 
 ### Finding a Node
 
@@ -100,11 +107,11 @@ courtesy of the `document` object.
 
 #### `document.getElementById()`
 
-This method provides the quickest access to a node, but it requires that we know
-something very specific about it — its `id`. Since IDs must be unique, this
-method only returns one element. (If you have two elements with the same ID,
-this method returns the first one — keep your IDs unique!) Given the following
-DOM tree
+This method provides the quickest access to a node, but it requires that we
+know something very specific about it — the element's `id`. Since `id`s must be
+unique, this method only returns one element. If you have two elements with the
+same `id`, this method returns the first one — keep your `id`s unique! Consider
+the following DOM tree:
 
 ``` html
 <div>
@@ -112,26 +119,31 @@ DOM tree
 </div>
 ```
 
-we could find the `h5` element with `document.getElementById('greeting')`.
-Notice how the `id` that we pass to `getElementById` is identical to the `id` in
-`<h5 id="greeting">`. We can assign properties to HTML nodes (or elements)
+We could find the `h5` element with `document.getElementById('greeting')`.
+Notice how the `id` that we pass to `getElementById` is identical to the `id`
+in `<h5 id="greeting">`? We can assign attributes to HTML nodes (or elements)
 simply by including them between the `<>` tags at the start of the element (so
 not in the `</h5>` tag, in this case).
 
 **Try it out!**
 
-Open up your web inspector (command+option+j on OS X) and find an element on the
-page — make note of its `id`. Then open up your console, type
+Open up your web inspector (command+option+j on OS X) and find an element on
+the page — make note of its `id`. Then open up your console, type
 `document.getElementById('theIdYouTookNoteOf')`, and check out your handy dandy
-DOM node. Try changing a few of its properties!
+DOM node. Try changing a few of its attributes!
 
 #### `document.getElementsByClassName()`
 
 This method, as its name implies, finds elements by their `className`. Unlike
 `id`, `className` does not need to be unique; as such, this method returns an
-HTMLCollection (basically a list of DOM nodes — note that it is _not_ an array,
-even though it has a `length` property) of all the elements with the given
-class. You can iterate over an HTMLCollection with a simple `for` loop.
+`HTMLCollection`. `HTMLCollection`s have a `length` property which you can
+access by adding `.length`
+
+> **IMPORTANT**: If you're familiar with some programming concepts, you might
+> be thinking "Oh, it gets an _array_ of HTML nodes with a class." **IT DOES
+> NOT RETURN AN ARRAY**. This is a common source of frustration among new front-end
+> programmers. As you learn about JavaScript `Array`s, later, resist thinking
+> that `document.getElementsByClassName()` as returning them.
 
 Given the following DOM tree
 
@@ -167,7 +179,7 @@ document.getElementsByClassName('banner')`.)
 
 Suppose you don't know an element's ID but you do know its tag name (the tag
 name is the main thing between the `<>`, e.g., `'div'`, `'span'`, `'h1'`, etc.).
-Since tag names aren't unique, this method returns an HTMLCollection of 0 to
+Since tag names aren't unique, this method returns an `HTMLCollection` of 0 to
 many nodes with the given tag.
 
 **Try it out!**
@@ -246,3 +258,5 @@ manipulating HTML elements.
 Understanding the tree structure of the DOM helps us navigate its hierarchy. In subtrees and branches we can find the nodes we need by IDs, class names or tag names. Once we've selected our elements, we can use JavaScript to manipulate them.
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/the-dom-is-a-tree'>The DOM is a Tree</a> on Learn.co and start learning to code for free.</p>
+
+[dom-graphic]:  https://s3.amazonaws.com/curriculum-content/skills-front-end-web-development/DOM-model.svg
