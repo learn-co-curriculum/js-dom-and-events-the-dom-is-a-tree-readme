@@ -259,4 +259,4 @@ Understanding the tree structure of the DOM helps us navigate its hierarchy. In 
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/the-dom-is-a-tree'>The DOM is a Tree</a> on Learn.co and start learning to code for free.</p>
 
-[dom-graphic]:  https://s3.amazonaws.com/curriculum-content/skills-front-end-web-development/DOM-model.svg
+[dom-graphic]:  https://curriculum-content.s3.amazonaws.com/skills-front-end-web-development/js-dom-and-events-the-dom-is-a-tree-readme/DOM-model.svg
