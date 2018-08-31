@@ -126,7 +126,7 @@ we could find all of the elements with `className === 'banner'` by calling `docu
 
 **Try it out!**
 
-Inspect the web page again, this time making note of a className. Get all elements with that className and give 'em a look. Remember, you can use a `for` loop to loop through them. (You can also assign the return value of `document.getElementsByClassName()` to a variable: `var elements = document.getElementsByClassName('banner')`.)
+Inspect the web page again, this time making note of a className. Get all elements with that className and give 'em a look. Remember, you can use a `for` loop to loop through them. (You can also assign the return value of `document.getElementsByClassName()` to a variable: `let elements = document.getElementsByClassName('banner')`.)
 
 #### `document.getElementsByTagName()`
 
